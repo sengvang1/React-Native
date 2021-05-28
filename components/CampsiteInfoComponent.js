@@ -29,6 +29,9 @@ function RenderCampsite(props) {
 
     const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
 
+    //drag left to right to add comment
+    const recongizeComment = ({dx}) => (dx > + 200) ? true : false;
+
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderGrant: () => {
@@ -55,6 +58,10 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+            }
+
+            if (recongizeComment(gesturedState)) {
+                props.onShowModal()
             }
             return true;
         }
